@@ -14,7 +14,12 @@
     <div class="row mrgnbtm">
         <Users v-if="users.length > 0" :users="users" />
     </div>
+
+    <div class="container mrgnbtm">
+      <Calendar2 />
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -22,6 +27,8 @@ import Header from './Header.vue'
 import CreateUser from './CreateUser.vue'
 import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
+//import calendar from './calendar.vue'
+import Calendar2 from './Calendar2.vue'
 import { getAllUsers, createUser } from '../services/UserService'
 
 export default {
@@ -30,7 +37,9 @@ export default {
     Header,
     CreateUser,
     DisplayBoard,
-    Users
+    Users,
+ //   calendar,
+    Calendar2
   },
   data() {
       return {
