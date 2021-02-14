@@ -30,10 +30,12 @@ module.exports = {
             console.log(JSON.stringify(docs));
             colaboradoresList = docs;
 
-            
+            var today = new Date();
+            console.log( "actual month ---> " + today.getMonth());
 
             colaboradoresList.forEach(function(colaborador) {
-                console.log("---" + colaborador.nombre);
+                console.log("---" + colaborador.fecha_nacimiento.getMonth());
+
               
             });
         });
