@@ -13,9 +13,10 @@
             <tbody>
               <tr v-for="item in users" :key="item.id">
                   <td>{{ item.id }}</td>
-                  <td>{{ item.firstName }}</td>
-                  <td>{{ item.lastName }}</td>
+                  <td>{{ item.nombre }}</td>
                   <td>{{ item.email }}</td>
+                  <td>{{ item.fecha_nacimiento }}</td>
+                   <td>{{ item.fecha_ingreso }}</td>
               </tr>
             </tbody>
         </table>

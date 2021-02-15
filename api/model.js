@@ -6,12 +6,14 @@ const {MongoClient} = require('mongodb');
 module.exports = {
     
 
-    async colaboradores () { 
+    async colaboradores_eventos() { 
         
         /**
         * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
         * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
         */
+
+       var eventos=[];
    
        const uri = "mongodb+srv://ulises:Kr4k3n1808!@cluster0.rcr7z.mongodb.net/hentropy?retryWrites=true&w=majority";
    
@@ -30,17 +32,54 @@ module.exports = {
             console.log(JSON.stringify(docs));
             colaboradoresList = docs;
 
+
             var today = new Date();
             console.log( "actual month ---> " + today.getMonth());
 
-            colaboradoresList.forEach(function(colaborador) {
-                console.log("---" + colaborador.fecha_nacimiento.getMonth());
+            
 
-              
-            });
-        });
+            colaboradoresList.forEach(function(colaborador) {
+                
+                try { colaborador.fecha_ingreso.getMonth() 
+                
+                    console.log("---" + colaborador.fecha_nacimiento.getMonth() );
+                    if (colaborador.fecha_nacimiento.getMonth() ==  today.getMonth()) {
+
+                        eventos.push(colaborador);
+                        console.log("zzz" + colaborador.nombre);
+
+                      } 
+
+                    } catch (error) {
+
+                      console.error(error);
     
- 
+                  }
+
+                  try { colaborador.fecha_ingreso.getMonth() 
+                
+                    console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
+                    if (colaborador.fecha_ingreso.getMonth() ==  today.getMonth()) {
+
+                        eventos.push(colaborador);
+                        console.log("xxxx" + colaborador.nombre);
+
+                      } 
+                  } catch (error) {
+
+                    console.error(error);
+  
+                 }
+
+        
+            });
+
+            console.log(JSON.stringify(eventos));
+            return  (eventos);
+
+
+        });
+
        
            //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
 
@@ -54,11 +93,11 @@ module.exports = {
            await client.close();
    
        }
-    
+       
+    console.log("EVENTOS" +JSON.stringify(eventos) )   ;
+   
 
     },
-
-
 
 
     bar: function () {

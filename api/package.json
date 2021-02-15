@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.4",
     "mongodb": "^3.6.4",
+    "nodemailer": "^6.4.18",
     "random-id": "^1.0.4"
   },
   "devDependencies": {

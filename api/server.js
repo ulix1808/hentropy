@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores } = require('./model');
+const { colaboradores_eventos } = require('./model');
+var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
@@ -12,13 +13,24 @@ require('./model.js');
 // place holder for the data
 const users = [];
 
+
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/dist')));
 
 app.get('/api/users', (req, res) => {
-  console.log('api/users called!!!!!!!')
-  colaboradores();
-  res.json(users);
+   console.log('api/users called!!!!!!!')
+
+    var eventos = colaboradores_eventos();
+    //EmailCtrl.sendEmail("pruuuuebbbbaaaaa", res)
+    console.log("33333"+JSON.stringify(eventos))
+    console.log("lo que llega al metodo: " + JSON.stringify(eventos))
+    console.log('!!!!!!')
+    res.json(eventos);
+  
+
+  
+
 });
 
 app.post('/api/user', (req, res) => {
@@ -31,6 +43,7 @@ app.post('/api/user', (req, res) => {
 
 app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+
 });
 
 app.listen(port, () => {
