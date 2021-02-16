@@ -7,14 +7,14 @@ export async function getAllUsers() {
     const data = await response.json();
     console.log(data);
     console.log("logs");
-    return  data.total;
+    return  data
 }
 
-export async function createUser(data) {
-    const response = await fetch(`/api/user`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({user: data})
-      })
-    return await response.json();
+export async function  getAllEmpresas() {
+    const response = await fetch(`/api/empresas`);
+    const data = await response.json();
+    console.log(data);
+    console.log("logs");
+    return  data
+  
 }

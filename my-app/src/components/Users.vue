@@ -4,19 +4,20 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>User Id</th>
+             
                 <th>Nombre</th>
-                <th>Fecha</th>
                 <th>Email</th>
+                <th>Evento</th>
+           
             </tr>
             </thead>
             <tbody>
               <tr v-for="item in users" :key="item.id">
-                  <td>{{ item.id }}</td>
+              
                   <td>{{ item.nombre }}</td>
                   <td>{{ item.email }}</td>
-                  <td>{{ item.fecha_nacimiento }}</td>
-                   <td>{{ item.fecha_ingreso }}</td>
+                  <td>{{ item.evento}}</td>
+     
               </tr>
             </tbody>
         </table>

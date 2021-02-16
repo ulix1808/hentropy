@@ -2,14 +2,10 @@
   <div class="hello">
     <Header />
     <div class="container mrgnbtm">
-          <div class="row">
-            <div class="col-md-8">
-                <CreateUser @createUser="userCreate($event)" />
-            </div>
-            <div class="col-md-4">
-                <DisplayBoard :numberOfUsers="numberOfUsers" @getAllUsers="getAllUsers()" />
-            </div>
-          </div>
+
+    </div>
+    <div class="row mrgnbtm">
+        <Empresa v-if="empresas.length > 0" :empresas="empresas" :object="object" />
     </div>
     <div class="row mrgnbtm">
         <Users v-if="users.length > 0" :users="users" />
@@ -24,19 +20,19 @@
 
 <script>
 import Header from './Header.vue'
-import CreateUser from './CreateUser.vue'
-import DisplayBoard from './DisplayBoard.vue'
+import Empresa from './Empresa.vue'
+//import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
 //import calendar from './calendar.vue'
 import Calendar2 from './Calendar2.vue'
-import { getAllUsers, createUser } from '../services/UserService'
+import { getAllUsers, getAllEmpresas } from '../services/UserService'
 
 export default {
   name: 'Dashboard',
   components: {
     Header,
-    CreateUser,
-    DisplayBoard,
+    Empresa,
+   // DisplayBoard,
     Users,
  //   calendar,
     Calendar2
@@ -44,8 +40,14 @@ export default {
   data() {
       return {
           users: [],
-          numberOfUsers: 0
-      }
+          numberOfUsers: 0,
+          empresas: [],
+   
+          object: {
+              name: 'Object Name',
+            }
+
+        }
   },
   methods: {
     getAllUsers() {
@@ -55,17 +57,31 @@ export default {
         this.numberOfUsers = this.users.length
       })
     },
-    userCreate(data) {
+        getAllEmpresas() {
+        getAllEmpresas().then(response => {
+        console.log("Empresas-----------------------------------------  ");
+        console.log(response);
+        console.log("Empresas----------------------------------------- ");
+        this.empresas = response
+        
+      })
+    },
+
+
+    /*
+   empresa(data) {
       console.log('data:::', data)
-      createUser(data).then(response => {
+      empresa(data).then(response => {
         
         console.log(response);
         this.getAllUsers();
       });
-    }
+    }*/
   },
   mounted () {
+    this.getAllEmpresas();
     this.getAllUsers();
+    
   }
 }
 </script>

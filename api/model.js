@@ -46,6 +46,8 @@ module.exports = {
                     console.log("---" + colaborador.fecha_nacimiento.getMonth() );
                     if (colaborador.fecha_nacimiento.getMonth() ==  today.getMonth()) {
 
+
+                        colaborador.evento="Cumpleaños :) !!"
                         eventos.push(colaborador);
                         console.log("zzz" + colaborador.nombre);
 
@@ -62,6 +64,7 @@ module.exports = {
                     console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
                     if (colaborador.fecha_ingreso.getMonth() ==  today.getMonth()) {
 
+                       colaborador.evento="Aniversario :) "
                         eventos.push(colaborador);
                         console.log("xxxx" + colaborador.nombre);
 
@@ -77,7 +80,7 @@ module.exports = {
 
             console.log(JSON.stringify(eventos));
             return res.json(eventos)
-            callbackPromise(eventos);
+            //callbackPromise(eventos);
 
 
         });
