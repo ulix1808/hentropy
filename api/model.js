@@ -2,11 +2,12 @@
 
 
 const {MongoClient} = require('mongodb');
+const { callbackPromise } = require('nodemailer/lib/shared');
 
 module.exports = {
     
 
-    async colaboradores_eventos() { 
+    async colaboradores_eventos(req, res) { 
         
         /**
         * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
@@ -34,7 +35,7 @@ module.exports = {
 
 
             var today = new Date();
-            console.log( "actual month ---> " + today.getMonth());
+            //console.log( "actual month ---> " + today.getMonth());
 
             
 
@@ -75,7 +76,8 @@ module.exports = {
             });
 
             console.log(JSON.stringify(eventos));
-            return  (eventos);
+            return res.json(eventos)
+            callbackPromise(eventos);
 
 
         });

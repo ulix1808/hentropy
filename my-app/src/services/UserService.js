@@ -4,7 +4,10 @@
 export async function getAllUsers() {
 
     const response = await fetch('/api/users');
-    return await response.json();
+    const data = await response.json();
+    console.log(data);
+    console.log("logs");
+    return  data.total;
 }
 
 export async function createUser(data) {
