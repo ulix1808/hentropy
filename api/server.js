@@ -59,6 +59,10 @@ app.get('/api/empresas', (req, res) => {
 
 });
 
+app.get('/api/eventos', (req, res) => {
+  var resJson=[{"inicio":"2021-02-20 00:12:00","fin":"2021-02-20 16:00","nombre":"Aniversario"},{"inicio":"2021-02-05 00:00", "fin":"2021-02-05 23:59","nombre":"Aniversario"}]
+  res.json(resJson);
+});
 
 app.post('/api/user', (req, res) => {
   const user = req.body.user;

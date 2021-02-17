@@ -137,6 +137,7 @@
 </template>
 
 <script>
+import { getAllEventos } from '../services/UserService'
   export default {
     data: () => ({
       focus: '',
@@ -150,6 +151,7 @@
       selectedEvent: {},
       selectedElement: null,
       selectedOpen: false,
+      allEvents:[],
       events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
@@ -194,12 +196,34 @@
       },
       updateRange ({ start, end }) {
         const events = []
+        console.log(start);
+        console.log(end);
+        getAllEventos().then(response => {
+          console.log("todos los eventos");
+        this.allEvents = response
 
-        const min = new Date(`${start.date}T00:00:00`)
+        for(let i = 0;i< this.allEvents.length;i++){
+          console.log(this.allEvents[1].email)
+          events.push({
+            name: this.allEvents[i].nombre ,
+            start:this.allEvents[i].inicio ,
+            end: this.allEvents[i].fin,
+            color: this.colors[this.rnd(0, this.colors.length - 1)],
+            //timed: !allDay,
+          })
+          this.events = events
+        }
+
+        })
+
+
+        /*const min = new Date(`${start.date}T00:00:00`)
         const max = new Date(`${end.date}T23:59:59`)
-        //const days = (max.getTime() - min.getTime()) / 86400000
-       // const eventCount = this.rnd(days, days + 20)
-        const eventCount = 5
+        
+
+        const days = (max.getTime() - min.getTime()) / 86400000
+        const eventCount = this.rnd(days, days + 20)
+        //const eventCount = 5
         for (let i = 0; i < eventCount; i++) {
           const allDay = this.rnd(0, 3) === 0
           const firstTimestamp = this.rnd(min.getTime(), max.getTime())
@@ -214,9 +238,9 @@
             color: this.colors[this.rnd(0, this.colors.length - 1)],
             timed: !allDay,
           })
-        }
+        }*/
 
-        this.events = events
+        //this.events = events
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
