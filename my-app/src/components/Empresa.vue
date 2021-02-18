@@ -33,7 +33,6 @@
       <Calendar2 :events= "eventosEmpresa"/>
     </div>
     </div>
-    
 </template>
 
 <script>

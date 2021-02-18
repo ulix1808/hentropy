@@ -16,6 +16,12 @@
               Today
             </v-btn>
             <v-btn
+              class="mr-4"
+              color="red"
+            >
+            agregar
+            </v-btn>
+            <v-btn
               fab
               text
               small
@@ -96,7 +102,8 @@
           >
             <v-card
               color="grey lighten-4"
-              min-width="350px"
+              min-width="600px"
+              min-height="400px"
               flat
             >
               <v-toolbar
@@ -124,7 +131,7 @@
                   color="secondary"
                   @click="selectedOpen = false"
                 >
-                  Cancel
+                  Agendar
                 </v-btn>
               </v-card-actions>
             </v-card>
