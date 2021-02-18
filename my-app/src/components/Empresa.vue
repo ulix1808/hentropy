@@ -38,7 +38,7 @@
 
 <script>
 
-import { getAllEmpresas, getAllEventos } from '../services/UserService'
+import { getAllEmpresas, getAllEventos, setEmpresa } from '../services/UserService'
 import Calendar2 from '../components/Calendar2'
 
   export default {
