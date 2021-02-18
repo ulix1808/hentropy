@@ -29,36 +29,65 @@
   </v-container>
         </div>
     </div>
+    <div class="container mrgnbtm">
+      <Calendar2 :events= "eventosEmpresa"/>
     </div>
+    </div>
+    
 </template>
 
 <script>
-import { getAllEmpresas } from '../services/UserService'
+import { getAllEmpresas, getAllEventos } from '../services/UserService'
+import Calendar2 from '../components/Calendar2'
+
+  
   export default {
+    components:{
+    Calendar2,
+  },
     data () {
       return {
         select: { },
         items: [],
+        eventosEmpresa:[],
+        colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       }
     },
     mounted(){
       console.log("el list fue creado");
-      //let aux=[]
       this.items= []
       getAllEmpresas().then(response => {
       this.select={Name:response[0].Name, id:response[0].id}
       this.items=response
-      
-
-      //console.log(aux.length)
-      //this.items=aux
       })
       
     },
     methods:{
       onChange(){
+         
         console.log(this.select.id);
-      }
+        const events = []
+
+        getAllEventos().then(response => {
+        this.allEvents = response
+
+        for(let i = 0;i< this.allEvents.length;i++){
+          events.push({
+            name: this.allEvents[i].nombre ,
+            start:this.allEvents[i].inicio ,
+            end: this.allEvents[i].fin,
+            color: this.colors[this.rnd(0, this.colors.length - 1)],
+            //timed: !allDay,
+          })
+          this.events = events
+          this.eventosEmpresa=events
+        }
+
+        })
+      },
+      rnd (a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a
+      },
     },
   }
 </script>

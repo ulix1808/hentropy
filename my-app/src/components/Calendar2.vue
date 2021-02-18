@@ -137,8 +137,14 @@
 </template>
 
 <script>
-import { getAllEventos } from '../services/UserService'
+//import { getAllEventos } from '../services/UserService'
   export default {
+    props:{
+      events:{
+        type:Array,
+        required:true
+      }
+    },
     data: () => ({
       focus: '',
       type: 'month',
@@ -152,7 +158,7 @@ import { getAllEventos } from '../services/UserService'
       selectedElement: null,
       selectedOpen: false,
       allEvents:[],
-      events: [],
+      //events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
     }),
@@ -172,6 +178,9 @@ import { getAllEventos } from '../services/UserService'
       },
       prev () {
         this.$refs.calendar.prev()
+      },
+      actualizarXEmpresa(identificador){
+        console.log(identificador);
       },
       next () {
         this.$refs.calendar.next()
@@ -195,7 +204,9 @@ import { getAllEventos } from '../services/UserService'
         nativeEvent.stopPropagation()
       },
       updateRange ({ start, end }) {
-        const events = []
+        console.log(start);
+        console.log(end);
+       /* const events = []
         console.log(start);
         console.log(end);
         getAllEventos().then(response => {
@@ -212,7 +223,7 @@ import { getAllEventos } from '../services/UserService'
           this.events = events
         }
 
-        })
+        })*/
 
 
         /*const min = new Date(`${start.date}T00:00:00`)

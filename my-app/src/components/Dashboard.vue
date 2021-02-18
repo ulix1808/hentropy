@@ -11,9 +11,7 @@
         <Users v-if="users.length > 0" :users="users" />
     </div>
 
-    <div class="container mrgnbtm">
-      <Calendar2 />
-    </div>
+    
   </div>
 
 </template>
@@ -24,7 +22,7 @@ import Empresa from './Empresa.vue'
 //import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
 //import calendar from './calendar.vue'
-import Calendar2 from './Calendar2.vue'
+//import Calendar2 from './Calendar2.vue'
 import { getAllUsers, getAllEmpresas } from '../services/UserService'
 
 export default {
@@ -35,13 +33,14 @@ export default {
    // DisplayBoard,
     Users,
  //   calendar,
-    Calendar2
+    //Calendar2
   },
   data() {
       return {
           users: [],
           numberOfUsers: 0,
           empresas: [],
+          EmpresaSeleccionada:0,
    
           object: {
               name: 'Object Name',
@@ -66,7 +65,7 @@ export default {
         
       })
     },
-
+  
 
     /*
    empresa(data) {
