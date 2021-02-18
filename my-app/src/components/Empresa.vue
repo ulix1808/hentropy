@@ -57,7 +57,7 @@ import { getAllEmpresas } from '../services/UserService'
     },
     methods:{
       onChange(){
-        console.log(this.select.Empresa);
+        console.log(this.select.id);
       }
     },
   }
