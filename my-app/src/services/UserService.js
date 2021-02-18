@@ -24,3 +24,13 @@ export async function  getAllEventos() {
     return  data
   
 }
+
+export async function setEmpresa(data) {
+    const response = await fetch(`/api/empresa_selector`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+      })
+    return await response.json();
+
+}

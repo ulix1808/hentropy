@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getAllEmpresas } from '../services/UserService'
+import { getAllEmpresas,setEmpresa } from '../services/UserService'
   export default {
     data () {
       return {
@@ -58,6 +58,11 @@ import { getAllEmpresas } from '../services/UserService'
     methods:{
       onChange(){
         console.log(this.select.id);
+        setEmpresa(this.select.id).then( response => {
+        console.log(response)
+
+        })
+
       }
     },
   }

@@ -30,7 +30,7 @@ module.exports = {
    
            colaboradoresList = await client.db("hentropy").collection("colaborador").find().toArray(function(err, docs) {
 
-            console.log(JSON.stringify(docs));
+            //console.log(JSON.stringify(docs));
             colaboradoresList = docs;
 
 
@@ -43,7 +43,7 @@ module.exports = {
                 
                 try { colaborador.fecha_ingreso.getMonth() 
                 
-                    console.log("---" + colaborador.fecha_nacimiento.getMonth() );
+                    //console.log("---" + colaborador.fecha_nacimiento.getMonth() );
                     if (colaborador.fecha_nacimiento.getMonth() ==  today.getMonth()) {
 
 
@@ -61,24 +61,24 @@ module.exports = {
 
                   try { colaborador.fecha_ingreso.getMonth() 
                 
-                    console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
+                    //console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
                     if (colaborador.fecha_ingreso.getMonth() ==  today.getMonth()) {
 
                        colaborador.evento="Aniversario :) "
                         eventos.push(colaborador);
-                        console.log("xxxx" + colaborador.nombre);
+                      //  console.log("xxxx" + colaborador.nombre);
 
                       } 
                   } catch (error) {
 
-                    console.error(error);
+                    //console.error(error);
   
                  }
 
         
             });
 
-            console.log(JSON.stringify(eventos));
+            //console.log(JSON.stringify(eventos));
             return res.json(eventos)
             //callbackPromise(eventos);
 
