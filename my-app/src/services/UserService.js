@@ -13,8 +13,7 @@ export async function getAllUsers() {
 export async function  getAllEmpresas() {
     const response = await fetch(`/api/empresas`);
     const data = await response.json();
-    console.log(data);
-    console.log("logs");
+
     return  data
   
 }

@@ -47,7 +47,7 @@ app.get('/api/empresas', (req, res) => {
    //console.log("33333"+JSON.stringify(eventos))
    //console.log("lo que llega al metodo: " + JSON.stringify(eventos))
    //console.log('!!!!!!')
-   var resp = [{"name":"Pemex"},{"name":"Hertz"}]
+   var resp = [{"Name":"Pemex","id":"1"},{"Name":"Hertz","id":"2"}]
    res.json(resp);
 
 

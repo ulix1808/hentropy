@@ -199,11 +199,9 @@ import { getAllEventos } from '../services/UserService'
         console.log(start);
         console.log(end);
         getAllEventos().then(response => {
-          console.log("todos los eventos");
         this.allEvents = response
 
         for(let i = 0;i< this.allEvents.length;i++){
-          console.log(this.allEvents[1].email)
           events.push({
             name: this.allEvents[i].nombre ,
             start:this.allEvents[i].inicio ,
