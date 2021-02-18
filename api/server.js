@@ -37,7 +37,7 @@ app.get('/api/empresas', (req, res) => {
   //console.log('api/empresas called!!!!!!!')
 
 
-   var resp = [{"Name":"Pemex","id":"1"},{"Name":"Hertz","id":"2"}]
+   var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
    res.json(resp);
 
 
@@ -57,8 +57,10 @@ app.post('/api/empresa_selector', (req, res) => {
 
 
 app.get('/api/eventos', (req, res) => {
-  var resJson=[{"inicio":"2021-02-20 00:12:00","fin":"2021-02-20 16:00","nombre":"Aniversario"},{"inicio":"2021-02-05 00:00", "fin":"2021-02-05 23:59","nombre":"Aniversario"}]
-  res.json(resJson);
+
+  
+  base.colaboradores_eventos(req, res);
+  
 });
 
 app.post('/api/user', (req, res) => {

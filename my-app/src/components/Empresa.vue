@@ -78,7 +78,7 @@ import Calendar2 from '../components/Calendar2'
 
         for(let i = 0;i< this.allEvents.length;i++){
           events.push({
-            name: this.allEvents[i].nombre ,
+            name: this.allEvents[i].evento ,
             start:this.allEvents[i].inicio ,
             end: this.allEvents[i].fin,
             color: this.colors[this.rnd(0, this.colors.length - 1)],

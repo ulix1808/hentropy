@@ -6,9 +6,10 @@
     </div>
     <div class="row mrgnbtm">
         <Empresa v-if="empresas.length > 0" :empresas="empresas" :object="object" />
+        <Users v-if="users.length > 0" :users="users" />
     </div>
     <div class="row mrgnbtm">
-        <Users v-if="users.length > 0" :users="users" />
+       
     </div>
 
     
