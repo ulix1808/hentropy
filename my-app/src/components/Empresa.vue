@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import { getAllEmpresas, getAllEventos } from '../services/UserService'
+
+import { getAllEmpresas, getAllEventos, setEmpresa } from '../services/UserService'
 import Calendar2 from '../components/Calendar2'
 
-  
   export default {
     components:{
     Calendar2,
@@ -65,6 +65,11 @@ import Calendar2 from '../components/Calendar2'
       onChange(){
          
         console.log(this.select.id);
+
+      setEmpresa(this.select.id).then( response => {
+        console.log(response)
+
+        })
         const events = []
 
         getAllEventos().then(response => {
@@ -72,7 +77,7 @@ import Calendar2 from '../components/Calendar2'
 
         for(let i = 0;i< this.allEvents.length;i++){
           events.push({
-            name: this.allEvents[i].nombre ,
+            name: this.allEvents[i].evento ,
             start:this.allEvents[i].inicio ,
             end: this.allEvents[i].fin,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
@@ -87,6 +92,7 @@ import Calendar2 from '../components/Calendar2'
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
       },
+
     },
   }
 </script>

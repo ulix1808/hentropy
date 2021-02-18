@@ -30,7 +30,7 @@ module.exports = {
    
            colaboradoresList = await client.db("hentropy").collection("colaborador").find().toArray(function(err, docs) {
 
-            console.log(JSON.stringify(docs));
+            //console.log(JSON.stringify(docs));
             colaboradoresList = docs;
 
 
@@ -38,18 +38,23 @@ module.exports = {
             //console.log( "actual month ---> " + today.getMonth());
 
             
-
+           
             colaboradoresList.forEach(function(colaborador) {
                 
-                try { colaborador.fecha_ingreso.getMonth() 
+                try { colaborador.fecha_nacimiento.getMonth() 
                 
-                    console.log("---" + colaborador.fecha_nacimiento.getMonth() );
+                    //console.log("---" + colaborador.fecha_nacimiento.getMonth() );
                     if (colaborador.fecha_nacimiento.getMonth() ==  today.getMonth()) {
 
-
-                        colaborador.evento="Cumpleaños :) !!"
-                        eventos.push(colaborador);
-                        console.log("zzz" + colaborador.nombre);
+                        cumpleanero = colaborador;
+                        cumpleanero.evento="Cumpleaños :) !!" + cumpleanero.nombre
+                        formatted_date_ = today.getFullYear() + "-" + (cumpleanero.fecha_nacimiento.getMonth() + 1) + "-" + (cumpleanero.fecha_nacimiento.getDate()+1 )
+                        cumpleanero.inicio=formatted_date_
+                        //colaborador.fin= formatted_date
+                        console.log("FORMATED DATE  NACIMIENTO" + cumpleanero.nombre+ "    " + formatted_date_);
+                        
+                        eventos.push(cumpleanero);
+                        console.log("zzz" + cumpleanero.nombre);
 
                       } 
 
@@ -61,24 +66,30 @@ module.exports = {
 
                   try { colaborador.fecha_ingreso.getMonth() 
                 
-                    console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
+                    //console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
                     if (colaborador.fecha_ingreso.getMonth() ==  today.getMonth()) {
 
-                       colaborador.evento="Aniversario :) "
-                        eventos.push(colaborador);
-                        console.log("xxxx" + colaborador.nombre);
+                       aniversario = colaborador 
+                       aniversario.evento="Aniversario :)  " + aniversario.nombre
+                       formatted_date = today.getFullYear() + "-" + (aniversario.fecha_ingreso.getMonth() + 1) + "-" + (aniversario.fecha_ingreso.getDate()+1) 
+                       console.log("FORMATED DATE  INGRESO" + aniversario.nombre+ "    " + formatted_date);
+                       aniversario.inicio=formatted_date
+                       console.log("Fecha de Ingreso" + formatted_date)
+                       //colaborador.fin=formatted_date
+                        eventos.push(aniversario);
+                        console.log("xxxx" + aniversario.nombre);
 
                       } 
                   } catch (error) {
 
-                    console.error(error);
+                    //console.error(error);
   
                  }
 
         
             });
 
-            console.log(JSON.stringify(eventos));
+            //console.log(JSON.stringify(eventos));
             return res.json(eventos)
             //callbackPromise(eventos);
 
