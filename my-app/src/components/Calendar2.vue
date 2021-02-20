@@ -160,6 +160,7 @@
       </v-col>
     </v-row>
   </v-app>
+  <qr-code text="Text to encode"></qr-code>
 </div>
 </template>
 

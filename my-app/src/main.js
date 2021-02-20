@@ -3,6 +3,8 @@ import App from './App.vue'
 import { BootstrapVue } from 'bootstrap-vue'
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'
+import VueQRCodeComponent from 'vue-qrcode-component'
+Vue.component('qr-code', VueQRCodeComponent)
 Vue.use(Vuetify);
 
 
