@@ -3,10 +3,11 @@
 
 const {MongoClient} = require('mongodb');
 const { callbackPromise } = require('nodemailer/lib/shared');
+const uri = "mongodb+srv://ulises:Kr4k3n1808!@cluster0.rcr7z.mongodb.net/hentropy?retryWrites=true&w=majority";
 
 module.exports = {
     
-
+     
     async colaboradores_eventos(req, res) { 
         
         /**
@@ -16,7 +17,7 @@ module.exports = {
 
        var eventos=[];
    
-       const uri = "mongodb+srv://ulises:Kr4k3n1808!@cluster0.rcr7z.mongodb.net/hentropy?retryWrites=true&w=majority";
+      
    
        const client = new MongoClient(uri);
    
@@ -118,7 +119,16 @@ module.exports = {
     },
 
 
-    bar: function () {
+    async insert_eventos(data) {
+
+      
+      const db = new MongoClient(uri);
+      await db.connect();
+      db.db("hentropy").collection("eventos").insertOne(data, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+      });
       // whatever
     }
   };
