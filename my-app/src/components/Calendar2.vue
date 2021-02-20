@@ -123,9 +123,17 @@
                 </v-btn>
               </v-toolbar>
               <v-card-text>
+                <v-alert
+                  border="top"
+                  color="red lighten-2"
+                  dark
+                  v-show="correoError"
+                >
+                  Faltan datos para el correo
+                </v-alert>
                 <span v-html="selectedEvent.details"></span>
                 <v-text-field label="Correo de destino"
-                  hide-details="auto" v-model="selectedEvent.email">
+                  hide-details="auto" v-model="selectedEvent.email" :readonly="true" >
                 </v-text-field>
                 <v-text-field label="Asunto"
                   hide-details="auto" v-model="auntoCorreo">
@@ -177,6 +185,7 @@ import { setCorreo } from '../services/UserService'
       selectedElement: null,
       selectedOpen: false,
       correo:"",
+      correoError:false,
       auntoCorreo:"",
       allEvents:[],
       //events: [],
@@ -204,16 +213,21 @@ import { setCorreo } from '../services/UserService'
         console.log(identificador);
       },
       envioCorreo(){
-        setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento).then( response => {
+        if(this.correo.length==0|| this.auntoCorreo==0){
+          this.correoError=true;
+        }else{
+    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento).then( response => {
           console.log(response)
+          this.selectedOpen = false
+         this.correoError=false
+         this.correo=""
+         this.auntoCorreo=""
         })
-        console.log(this.selectedEvent.email)
-        console.log(this.correo)
-        console.log(this.auntoCorreo)
-        console.log(this.selectedEvent.id_colab)
-        console.log(this.selectedEvent.tipo_evento)
+         
+        }
+      
             
-        this.selectedOpen = false
+       
       },
       next () {
         this.$refs.calendar.next()
