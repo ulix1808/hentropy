@@ -17,7 +17,7 @@
             </v-btn>
             <v-btn
               class="mr-4"
-              color="red"
+              color="#adbacf"
             >
             agregar
             </v-btn>
@@ -25,7 +25,7 @@
               fab
               text
               small
-              color="grey darken-2"
+              color="#adbacf"
               @click="prev"
             >
               <v-icon small>
@@ -102,7 +102,7 @@
           >
             <v-card
               color="grey lighten-4"
-              min-width="600px"
+              min-width="500px"
               min-height="400px"
               flat
             >
@@ -124,12 +124,24 @@
               </v-toolbar>
               <v-card-text>
                 <span v-html="selectedEvent.details"></span>
+                <v-text-field label="Correo de destino"
+                  hide-details="auto" v-model="selectedEvent.email">
+                </v-text-field>
+                <v-text-field label="Asunto"
+                  hide-details="auto" v-model="auntoCorreo">
+                </v-text-field>
+                <v-textarea name="mensajeCorreo"
+                  label="Mensaje del correo"
+                  hint="Agenda el correo"
+                  v-model="correo">
+                </v-textarea>
               </v-card-text>
               <v-card-actions>
                 <v-btn
                   text
                   color="secondary"
-                  @click="selectedOpen = false"
+                  @click="envioCorreo()"
+                  
                 >
                   Agendar
                 </v-btn>
@@ -164,6 +176,8 @@
       selectedEvent: {},
       selectedElement: null,
       selectedOpen: false,
+      correo:"",
+      auntoCorreo:"",
       allEvents:[],
       //events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
@@ -189,11 +203,18 @@
       actualizarXEmpresa(identificador){
         console.log(identificador);
       },
+      envioCorreo(){
+        console.log(this.selectedEvent.email)
+        console.log(this.correo)
+        console.log(this.auntoCorreo)
+        this.selectedOpen = false
+      },
       next () {
         this.$refs.calendar.next()
       },
       showEvent ({ nativeEvent, event }) {
         const open = () => {
+          console.log(event)
           this.selectedEvent = event
           this.selectedElement = nativeEvent.target
           setTimeout(() => {

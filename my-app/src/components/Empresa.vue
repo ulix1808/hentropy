@@ -81,6 +81,7 @@ import Calendar2 from '../components/Calendar2'
             start:this.allEvents[i].inicio ,
             end: this.allEvents[i].fin,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
+            email: this.allEvents[i].email,
             //timed: !allDay,
           })
           this.events = events
