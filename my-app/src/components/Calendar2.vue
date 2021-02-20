@@ -156,7 +156,7 @@
 </template>
 
 <script>
-//import { getAllEventos } from '../services/UserService'
+import { setCorreo } from '../services/UserService'
   export default {
     props:{
       events:{
@@ -204,9 +204,15 @@
         console.log(identificador);
       },
       envioCorreo(){
+        setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento).then( response => {
+          console.log(response)
+        })
         console.log(this.selectedEvent.email)
         console.log(this.correo)
         console.log(this.auntoCorreo)
+        console.log(this.selectedEvent.id_colab)
+        console.log(this.selectedEvent.tipo_evento)
+            
         this.selectedOpen = false
       },
       next () {

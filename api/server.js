@@ -42,6 +42,11 @@ app.get('/api/empresas', (req, res) => {
 
 
 });
+app.post('/api/envioCorreo',(req,res)=>{
+  console.log(req.body.correo);
+  console.log(req.body.id_colab);
+
+});
 
 
 app.post('/api/empresa_selector', (req, res) => {
