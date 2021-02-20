@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores_eventos } = require('./model');
+const { colaboradores_eventos,insert_eventos } = require('./model');
 var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
@@ -45,6 +45,12 @@ app.get('/api/empresas', (req, res) => {
 app.post('/api/envioCorreo',(req,res)=>{
   console.log(req.body.correo);
   console.log(req.body.id_colab);
+  //body: JSON.stringify({correo: correo,email:email,asunto:auntoCorreo,id_colab:id_colab,tipo_evento:tipo_evento})
+  evento = req.body;
+  evento.bandera=1;
+  insert_eventos(evento);
+
+
 
 });
 
@@ -56,8 +62,6 @@ app.post('/api/empresa_selector', (req, res) => {
   
    res.json("ok");
 
-
-
 });
 
 
@@ -65,7 +69,7 @@ app.get('/api/eventos', (req, res) => {
 
   
   base.colaboradores_eventos(req, res);
-  
+
 });
 
 app.post('/api/user', (req, res) => {
