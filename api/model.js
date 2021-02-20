@@ -46,8 +46,9 @@ module.exports = {
                     //console.log("---" + colaborador.fecha_nacimiento.getMonth() );
                     if (colaborador.fecha_nacimiento.getMonth() ==  today.getMonth()) {
 
-                        cumpleanero = colaborador;
+                        let cumpleanero = colaborador;
                         cumpleanero.evento="Cumpleaños :) !!" + cumpleanero.nombre
+                        cumpleanero.tipo_evento=1;
                         formatted_date_ = today.getFullYear() + "-" + (cumpleanero.fecha_nacimiento.getMonth() + 1) + "-" + (cumpleanero.fecha_nacimiento.getDate()+1 )
                         cumpleanero.inicio=formatted_date_
                         //colaborador.fin= formatted_date
@@ -69,8 +70,9 @@ module.exports = {
                     //console.log(  "--- aniversario month" + colaborador.fecha_ingreso.getMonth() );
                     if (colaborador.fecha_ingreso.getMonth() ==  today.getMonth()) {
 
-                       aniversario = colaborador 
+                       let aniversario = colaborador 
                        aniversario.evento="Aniversario :)  " + aniversario.nombre
+                       aniversario.tipo_evento=2;
                        formatted_date = today.getFullYear() + "-" + (aniversario.fecha_ingreso.getMonth() + 1) + "-" + (aniversario.fecha_ingreso.getDate()+1) 
                        console.log("FORMATED DATE  INGRESO" + aniversario.nombre+ "    " + formatted_date);
                        aniversario.inicio=formatted_date
