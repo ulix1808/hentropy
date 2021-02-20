@@ -216,7 +216,7 @@ import { setCorreo } from '../services/UserService'
         if(this.correo.length==0|| this.auntoCorreo==0){
           this.correoError=true;
         }else{
-    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento).then( response => {
+    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento,this.selectedEvent.start).then( response => {
           console.log(response)
           this.selectedOpen = false
          this.correoError=false
