@@ -72,7 +72,7 @@ import Calendar2 from '../components/Calendar2'
         })
         const events = []
 
-        getAllEventos().then(response => {
+        getAllEventos(this.select.id).then(response => {
         this.allEvents = response
 
         for(let i = 0;i< this.allEvents.length;i++){

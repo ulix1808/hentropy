@@ -130,5 +130,140 @@ module.exports = {
         db.close();
       });
       // whatever
+    },
+
+        async get_colaboradores(req, res) {
+            
+        // Comentar la linea que simula que esta recibiendo un empresa ID
+        
+        req = "602dd8de707cc1d0c05437ee"
+
+        var colaboradores=[];
+    
+        const client = new MongoClient(uri);
+    
+        try {
+    
+            // Connect to the MongoDB cluster
+    
+            await client.connect();
+    
+            // Make the appropriate DB calls
+    
+            colaboradoresList = await client.db("hentropy").collection("colaborador").find({ empresa_id:req }).toArray(function(err, docs) {
+
+              //console.log(JSON.stringify(docs));
+              colaboradoresList = docs;
+
+
+
+              //console.log(""JSON.stringify(eventos));
+              //return res.json(colaboradoresList);
+              //callbackPromise(eventos);
+
+
+          });
+
+            //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
+
+    
+        } catch (e) {
+    
+            console.error(e);
+    
+        } finally {
+    
+            await client.close();
+    
+        }
+        
+      console.log("COLABORADORES" +JSON.stringify(colaboradoresList) )   ;
+    
+
+      },
+
+      async get_eventos(req, res) {
+            
+        /**
+        * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+        * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+        */
+
+      var eventos=[];
+
+      const client = new MongoClient(uri);
+
+      try {
+
+          // Connect to the MongoDB cluster
+
+          await client.connect();
+
+          // Make the appropriate DB calls
+
+          EventosList = await client.db("hentropy").collection("eventos").find().toArray(function(err, docs) {
+
+            //console.log(JSON.stringify(docs));
+            EventosList = docs;
+
+            var today = new Date();
+            //console.log( "actual month ---> " + today.getMonth());
+          
+            EventosList.forEach(function(evento) {
+                
+                try { evento.fecha_evento.getMonth() 
+                
+                    //console.log("---" + colaborador.fecha_nacimiento.getMonth() );
+                    if (evento.fecha_evento.getMonth() ==  today.getMonth()) {
+
+                  
+                        evento.evento= evento.nombre
+                        formatted_date_ = today.getFullYear() + "-" + (evento.fecha_evento.getMonth()+ 1) + "-" + (evento.fecha_evento.getDate()+1 )
+                        evento.inicio=formatted_date_
+                        //colaborador.fin= formatted_date
+                        console.log("FORMATED DATE  " + evento.nombre+ "    " + formatted_date_);
+                        eventos.push(evento);
+                        console.log("zzz" + evento.nombre);
+
+                      } 
+
+                    } catch (error) {
+
+                      console.error(error);
+    
+                  }
+
+
+
+        
+            });
+
+            //console.log(JSON.stringify(eventos));
+            return res.json(eventos)
+            //callbackPromise(eventos);
+
+
+        });
+
+      
+          //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
+
+
+      } catch (e) {
+
+          console.error(e);
+
+      } finally {
+
+          await client.close();
+
+      }
+      
+    console.log("EVENTOS" +JSON.stringify(eventos) )   ;
+
+
     }
-  };
+
+
+
+ };

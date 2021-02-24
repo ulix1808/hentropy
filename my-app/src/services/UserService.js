@@ -18,10 +18,16 @@ export async function  getAllEmpresas() {
   
 }
 
-export async function  getAllEventos() {
-    const response = await fetch(`/api/eventos`);
-    const data = await response.json();
-    return  data
+export async function  getAllEventos(emp) {
+    const response = await fetch(`/api/eventos`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({empresa: emp})
+
+
+    })
+    return  await response.json();
+   
   
 }
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores_eventos,insert_eventos } = require('./model');
+const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores } = require('./model');
 var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
@@ -27,7 +27,6 @@ app.get('/api/users', (req, res) => {
     //return res.send(JSON.stringify(colaboradores_eventos()));
     base.colaboradores_eventos(req, res);
     //res.json(colaboradores_eventos());
-
     //res.write(colaboradores_eventos());
 
 });
@@ -65,10 +64,14 @@ app.post('/api/empresa_selector', (req, res) => {
 });
 
 
-app.get('/api/eventos', (req, res) => {
+app.post('/api/eventos', (req, res) => {
 
   
-  base.colaboradores_eventos(req, res);
+  base.get_eventos(req, res);
+  
+  //metodo para obtener los colaborradores por empresa:
+  
+  //base.get_colaboradores(req,res);
 
 });
 
