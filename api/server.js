@@ -39,8 +39,16 @@ app.get('/api/empresas', (req, res) => {
    var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
    res.json(resp);
 
+  });
 
-});
+   app.get('/api/colaboradores', (req, res) => {
+    //console.log('api/empresas called!!!!!!!')
+  
+   base.get_colaboradores(req,res);
+
+
+
+  });
 app.post('/api/envioCorreo',(req,res)=>{
   console.log(req.body.correo);
   console.log(req.body.id_colab);
