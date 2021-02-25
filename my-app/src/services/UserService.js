@@ -18,6 +18,16 @@ export async function  getAllEmpresas() {
   
 }
 
+
+export async function  getColaboradores() {
+    const response = await fetch(`/api/colaboradores`);
+    console.log("esperando colaboradores");
+    const data = await response.json();
+    console.log(data);
+    return  data
+  
+}
+
 export async function  getAllEventos(emp) {
     const response = await fetch(`/api/eventos`,{
         method: 'POST',
