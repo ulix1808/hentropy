@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores } = require('./model');
+const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores,get_empresas } = require('./model');
 var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
@@ -36,8 +36,10 @@ app.get('/api/empresas', (req, res) => {
   //console.log('api/empresas called!!!!!!!')
 
 
-   var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
-   res.json(resp);
+   //var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
+   //res.json(resp);
+   base.get_empresas(req,res);
+
 
   });
 

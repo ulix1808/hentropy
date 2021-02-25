@@ -14,10 +14,10 @@
       <v-col cols="6">
         <v-select
           v-model="select"
-          :hint="`${select.Name}, ${select.id}`"
+          :hint="`${select.name}, ${select._id}`"
           :items="items"
-          item-text="Name"
-          item-value="Id"
+          item-text="name"
+          item-value="_id"
           label="Select"
           persistent-hint
           return-object
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="container mrgnbtm">
-      <Calendar2 :events= "eventosEmpresa" :idEmpresa="select.id"/>
+      <Calendar2 :events= "eventosEmpresa" :idEmpresa="select._id"/>
     </div>
     </div>
 </template>
@@ -56,7 +56,7 @@ import Calendar2 from '../components/Calendar2'
       console.log("el list fue creado");
       this.items= []
       getAllEmpresas().then(response => {
-      this.select={Name:response[0].Name, id:response[0].id}
+      this.select={Name:response[0].name, id:response[0]._id}
       this.items=response
       })
       
@@ -64,15 +64,15 @@ import Calendar2 from '../components/Calendar2'
     methods:{
       onChange(){
          
-        console.log(this.select.id);
+        console.log(this.select._id);
 
-      setEmpresa(this.select.id).then( response => {
+      setEmpresa(this.select._id).then( response => {
         console.log(response)
 
         })
         const events = []
 
-        getAllEventos(this.select.id).then(response => {
+        getAllEventos(this.select._id).then(response => {
         this.allEvents = response
 
         for(let i = 0;i< this.allEvents.length;i++){
