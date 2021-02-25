@@ -15,12 +15,7 @@
             >
               Today
             </v-btn>
-            <v-btn
-              class="mr-4"
-              color="#adbacf"
-            >
-            agregar
-            </v-btn>
+              <agregar class="mr-4" :idEmpresa="idEmpresa"/>
             <v-btn
               fab
               text
@@ -143,6 +138,7 @@
                   hint="Agenda el correo"
                   v-model="correo">
                 </v-textarea>
+                <qr-code text="Text to encode"></qr-code>
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -160,19 +156,26 @@
       </v-col>
     </v-row>
   </v-app>
-  <qr-code text="Text to encode"></qr-code>
+  
+  
 </div>
 </template>
 
 <script>
 import { setCorreo } from '../services/UserService'
+import agregar from '../components/agregar'
   export default {
+    
     props:{
       events:{
         type:Array,
         required:true
-      }
+      },
+      idEmpresa:String,
     },
+    components:{
+    agregar,
+  },
     data: () => ({
       focus: '',
       type: 'month',
@@ -255,50 +258,6 @@ import { setCorreo } from '../services/UserService'
       updateRange ({ start, end }) {
         console.log(start);
         console.log(end);
-       /* const events = []
-        console.log(start);
-        console.log(end);
-        getAllEventos().then(response => {
-        this.allEvents = response
-
-        for(let i = 0;i< this.allEvents.length;i++){
-          events.push({
-            name: this.allEvents[i].nombre ,
-            start:this.allEvents[i].inicio ,
-            end: this.allEvents[i].fin,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
-            //timed: !allDay,
-          })
-          this.events = events
-        }
-
-        })*/
-
-
-        /*const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        
-
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
-        //const eventCount = 5
-        for (let i = 0; i < eventCount; i++) {
-          const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
-          events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
-          })
-        }*/
-
-        //this.events = events
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a

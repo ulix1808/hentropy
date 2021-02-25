@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="container mrgnbtm">
-      <Calendar2 :events= "eventosEmpresa"/>
+      <Calendar2 :events= "eventosEmpresa" :idEmpresa="select.id"/>
     </div>
     </div>
 </template>
