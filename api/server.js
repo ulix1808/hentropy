@@ -42,7 +42,7 @@ app.get('/api/empresas', (req, res) => {
   });
 
    app.get('/api/colaboradores', (req, res) => {
-    //console.log('api/empresas called!!!!!!!')
+    console.log('api/colaboradores called!!!!!!!')
   
    base.get_colaboradores(req,res);
 

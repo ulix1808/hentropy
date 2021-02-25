@@ -178,7 +178,7 @@ module.exports = {
         }
         
       console.log("COLABORADORES" +JSON.stringify(colaboradoresList) )   ;
-    
+        return res.json(colaboradoresList);
 
       },
 
