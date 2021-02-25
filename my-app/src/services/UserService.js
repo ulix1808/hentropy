@@ -41,6 +41,20 @@ export async function  getAllEventos(emp) {
   
 }
 
+
+export async function  createEvent(data) {
+    const response = await fetch(`/api/createEvent`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+
+
+    })
+    return  await response.json();
+   
+  
+}
+
 export async function setEmpresa(data) {
     const response = await fetch(`/api/empresa_selector`, {
         method: 'POST',
