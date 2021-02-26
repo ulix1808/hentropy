@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores } = require('./model');
+const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores,get_empresas } = require('./model');
 var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
@@ -36,12 +36,14 @@ app.get('/api/empresas', (req, res) => {
   //console.log('api/empresas called!!!!!!!')
 
 
-   var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
-   res.json(resp);
+   //var resp = [{"Name":"Pemex","id":"602dd8de707cc1d0c05437ee"},{"Name":"Hertz","id":"602dd8de707cc1d0c05437f0"}]
+   //res.json(resp);
+   base.get_empresas(req,res);
+
 
   });
 
-   app.get('/api/colaboradores', (req, res) => {
+   app.post('/api/colaboradores', (req, res) => {
     console.log('api/colaboradores called!!!!!!!')
   
    base.get_colaboradores(req,res);
@@ -49,6 +51,15 @@ app.get('/api/empresas', (req, res) => {
 
 
   });
+app.post('/api/createEvent',(req,res)=>{
+  console.log(req.body);
+  res="ok"
+  return res
+
+
+});
+
+
 app.post('/api/envioCorreo',(req,res)=>{
   console.log(req.body.correo);
   console.log(req.body.id_colab);

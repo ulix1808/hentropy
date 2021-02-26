@@ -136,8 +136,9 @@ module.exports = {
             
         // Comentar la linea que simula que esta recibiendo un empresa ID
         
-        req = "602dd8de707cc1d0c05437ee"
+        //req = "602dd8de707cc1d0c05437ee"
 
+        //console.log("--------------------------------------------- " + req.json)
         var colaboradores=[];
     
         const client = new MongoClient(uri);
@@ -150,7 +151,7 @@ module.exports = {
     
             // Make the appropriate DB calls
     
-            colaboradoresList = await client.db("hentropy").collection("colaborador").find({ empresa_id:req }).toArray(function(err, docs) {
+            colaboradoresList = await client.db("hentropy").collection("colaborador").find({ empresa_id:req.body.empresa_id }).toArray(function(err, docs) {
 
               //console.log(JSON.stringify(docs));
               colaboradoresList = docs;
@@ -177,8 +178,10 @@ module.exports = {
     
         }
         
-      console.log("COLABORADORES" +JSON.stringify(colaboradoresList) )   ;
+
+        //console.log("COLABORADORES" +JSON.stringify(colaboradoresList) )   ;
         return res.json(colaboradoresList);
+    
 
       },
 
@@ -260,6 +263,58 @@ module.exports = {
       }
       
     console.log("EVENTOS" +JSON.stringify(eventos) )   ;
+
+
+    },
+
+
+    async get_empresas(req, res) {
+            
+      /**
+      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+      */
+
+      var eventos=[];
+
+      const client = new MongoClient(uri);
+
+      try {
+
+          // Connect to the MongoDB cluster
+
+          await client.connect();
+
+          // Make the appropriate DB calls
+
+          EmpresasList = await client.db("hentropy").collection("empresa").find().toArray(function(err, docs) {
+
+            //console.log(JSON.stringify(docs));
+            EmpresasList = docs;
+
+            //console.log( "actual month ---> " + today.getMonth());
+          
+            console.log("ppppppppppppppppppppppppppppppp" + JSON.stringify(EmpresasList));
+            return res.json(EmpresasList)
+            //callbackPromise(eventos);
+
+
+        });
+
+      
+          //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
+
+
+      } catch (e) {
+
+          console.error(e);
+
+      } finally {
+
+          await client.close();
+
+      }
+   
 
 
     }

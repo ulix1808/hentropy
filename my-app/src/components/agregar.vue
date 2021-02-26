@@ -45,12 +45,22 @@
         <v-card-text>
           <v-container>
             <v-row>
-                <v-col cols="12">
+                <v-col cols="12"
+                sm="6"
+                ms="10">
                 <v-text-field
                   label="Empresa"
                   v-model="idEmpresa"
                   :readonly="true"
                 ></v-text-field>
+              </v-col>
+              <v-col cols="12"
+                sm="6"
+                ms="2">
+                <v-switch
+                v-model="switch1"
+                :label="`General`"
+                ></v-switch>
               </v-col>
               <v-col cols="12" 
                 sm="6"
@@ -90,6 +100,7 @@
       :search="search"
       :custom-filter="filterOnlyCapsText"
       @click:row="handleClick"
+      v-show="!switch1"
     >
       <template v-slot:top>
         <v-text-field
@@ -143,7 +154,7 @@
 </template>
 
 <script>
-import { getColaboradores} from '../services/UserService'
+import { getColaboradores,createEvent} from '../services/UserService'
   export default {
           props:{
               idEmpresa:String,
@@ -156,6 +167,7 @@ import { getColaboradores} from '../services/UserService'
       nombreEvento:"",
       descripcionEvento:"",
       seleccionado:[],
+      switch1:false,
       desserts:[]
     }),
     computed: {
@@ -181,7 +193,7 @@ import { getColaboradores} from '../services/UserService'
         idEmpresa(nuevoValor,valorAnterior){
             console.log("El nombre pasó de ser %s a %s", valorAnterior, nuevoValor);
 
-           getColaboradores().then(response => {
+           getColaboradores(nuevoValor).then(response => {
                console.log("lista de colaboradores--------------");
             console.log(response)
             this.desserts=response
@@ -203,11 +215,31 @@ import { getColaboradores} from '../services/UserService'
           this.seleccionado=value;
       },
       guardarEvento(){
-          console.log(this.seleccionado._id)
-          console.log(this.nombreEvento)
-          console.log(this.descripcionEvento)
-          console.log(this.seleccionado.email)
-          console.log(this.fechaEvento)
+          let pet=[]
+          if(this.switch1){
+              pet.push({
+                  id:this.idEmpresa,
+                  nombreEvento: this.nombreEvento,
+                  descripcionEvento: this.descripcionEvento,
+                  email: this.seleccionado.email,
+                  fecha: this.fechaEvento,
+                  tipo: "global",
+              })
+          }else{
+              pet.push({
+                  id:this.seleccionado._id,
+                  nombreEvento: this.nombreEvento,
+                  descripcionEvento: this.descripcionEvento,
+                  email: this.seleccionado.email,
+                  fecha: this.fechaEvento,
+                  tipo: "individual",
+              })
+          }
+
+          createEvent(pet).then(response => {
+               console.log("guardando evento--------------");
+            console.log(response)
+            })
           this.dialog = false
 
       },

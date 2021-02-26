@@ -19,8 +19,12 @@ export async function  getAllEmpresas() {
 }
 
 
-export async function  getColaboradores() {
-    const response = await fetch(`/api/colaboradores`);
+export async function  getColaboradores(empresa_id) {
+    const response = await fetch(`/api/colaboradores`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({empresa_id: empresa_id})
+    });
     console.log("esperando colaboradores");
     const data = await response.json();
     console.log(data);
@@ -33,6 +37,20 @@ export async function  getAllEventos(emp) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({empresa: emp})
+
+
+    })
+    return  await response.json();
+   
+  
+}
+
+
+export async function  createEvent(data) {
+    const response = await fetch(`/api/createEvent`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
 
 
     })
