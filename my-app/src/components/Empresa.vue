@@ -80,7 +80,7 @@ import Calendar2 from '../components/Calendar2'
             name: this.allEvents[i].evento ,
             start:this.allEvents[i].inicio ,
             end: this.allEvents[i].fin,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
+            color: this.allEvents[i].color,
             email: this.allEvents[i].email,
             id_colab: this.allEvents[i]._id,
             tipo_evento: this.allEvents[i].tipo_evento,

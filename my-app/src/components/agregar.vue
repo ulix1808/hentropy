@@ -227,7 +227,8 @@ import { getColaboradores,createEvent} from '../services/UserService'
               })
           }else{
               pet.push({
-                  id:this.seleccionado._id,
+                  id_colab:this.seleccionado._id,
+                  id:this.idEmpresa,
                   nombreEvento: this.nombreEvento,
                   descripcionEvento: this.descripcionEvento,
                   email: this.seleccionado.email,
