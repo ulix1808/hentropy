@@ -158,6 +158,7 @@ import { getColaboradores,createEvent} from '../services/UserService'
   export default {
           props:{
               idEmpresa:String,
+              banderacambio:String,
     },
     data: () => ({
       dialog: false,
@@ -244,6 +245,7 @@ import { getColaboradores,createEvent} from '../services/UserService'
             this.nombreEvento=""
             this.descripcionEvento=""
             this.fechaEvento=""
+            this.$emit("banderacambio","si llego el cambio")
             })
           this.dialog = false
 

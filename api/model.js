@@ -148,7 +148,7 @@ module.exports = {
                 if (err) throw err;
                 console.log("1 document inserted");
                 db.close();
-                return "ok";
+                return res.json("ok");
               });
               // whatever
 

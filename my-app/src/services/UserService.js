@@ -47,6 +47,7 @@ export async function  getAllEventos(emp) {
 
 
 export async function  createEvent(data) {
+    console.log(data)
     const response = await fetch(`/api/createEvent`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -56,7 +57,6 @@ export async function  createEvent(data) {
     })
     console.log("evento creado")
     return  await response.json();
-   
   
 }
 

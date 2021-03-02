@@ -15,7 +15,7 @@
             >
               Today
             </v-btn>
-              <agregar class="mr-4" :idEmpresa="idEmpresa"/>
+              <agregar class="mr-4" :idEmpresa="idEmpresa" v-on:banderacambio="banderacambio"/>
             <v-btn
               fab
               text
@@ -162,7 +162,7 @@
 </template>
 
 <script>
-import { setCorreo } from '../services/UserService'
+import { setCorreo,getAllEventos } from '../services/UserService'
 import agregar from '../components/agregar'
   export default {
     
@@ -203,6 +203,30 @@ import agregar from '../components/agregar'
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
+      },
+      banderacambio(valor){
+        console.log(valor)
+        const events = []
+        getAllEventos(this.idEmpresa).then(response => {
+        this.allEvents = response
+
+        for(let i = 0;i< this.allEvents.length;i++){
+          events.push({
+            name: this.allEvents[i].evento ,
+            start:this.allEvents[i].inicio ,
+            end: this.allEvents[i].fin,
+            color: this.allEvents[i].color,
+            email: this.allEvents[i].email,
+            id_colab: this.allEvents[i]._id,
+            tipo_evento: this.allEvents[i].tipo_evento,
+
+            //timed: !allDay,
+          })
+          this.events = events
+          this.eventosEmpresa=events
+        }
+
+        })
       },
       getEventColor (event) {
         return event.color
