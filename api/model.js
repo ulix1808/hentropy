@@ -3,6 +3,8 @@
 
 const {MongoClient} = require('mongodb');
 const { callbackPromise } = require('nodemailer/lib/shared');
+const { ObjectId }= require('mongodb');
+
 const uri = "mongodb+srv://ulises:Kr4k3n1808!@cluster0.rcr7z.mongodb.net/hentropy?retryWrites=true&w=majority";
 
 module.exports = {
@@ -119,17 +121,50 @@ module.exports = {
     },
 
 
-    async insert_eventos(data) {
+    async insert_eventos(req,res) {
 
       
       const db = new MongoClient(uri);
-      await db.connect();
-      db.db("hentropy").collection("eventos").insertOne(data, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-      });
-      // whatever
+
+      try {
+              await db.connect();
+              data = (req.body[0]);
+
+              data.estatus="generado";
+              fecha=data.fecha
+              data.fecha = new Date(fecha);
+              if (data.tipo =="global"){
+
+                  // obtener la empresa
+                let result = await this.get_empresa_by_id(data.id)
+
+                console.log("EMAIL -----"  + result)
+                data.email = result;
+                
+              }
+
+
+              db.db("hentropy").collection("eventos").insertOne(data, function(err) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                db.close();
+                return "ok";
+              });
+              // whatever
+
+            } catch (e) {
+    
+              console.error(e);
+               return "error al insertar";
+      
+          } finally {
+      
+              await db.close();
+              return "ok";
+      
+          }
+
+    
     },
 
         async get_colaboradores(req, res) {
@@ -203,8 +238,15 @@ module.exports = {
           await client.connect();
 
           // Make the appropriate DB calls
+          //console.log("EMPRESA ID AARON " +req.body.empresa );
 
-          EventosList = await client.db("hentropy").collection("eventos").find().toArray(function(err, docs) {
+          EventosList = await client.db("hentropy").collection("eventos").find({"id" : req.body.empresa}).toArray(function(err, docs) {
+
+
+
+          //  Extraer los colaboradores de la empresa y luego rrecorrer la lista de eventos y si concide el colaborador ID o empresa ID se ingresa el evento ---
+
+          // for each recorre la lista de colaboradores otro for each para eventos y dentro del if un hacemmos el push del evento 
 
             //console.log(JSON.stringify(docs));
             EventosList = docs;
@@ -214,19 +256,31 @@ module.exports = {
           
             EventosList.forEach(function(evento) {
                 
-                try { evento.fecha_evento.getMonth() 
+                try { evento.fecha.getMonth() 
                 
                     //console.log("---" + colaborador.fecha_nacimiento.getMonth() );
-                    if (evento.fecha_evento.getMonth() ==  today.getMonth()) {
+                    if (evento.fecha.getMonth() ==  today.getMonth()) {
 
                   
-                        evento.evento= evento.nombre
-                        formatted_date_ = today.getFullYear() + "-" + (evento.fecha_evento.getMonth()+ 1) + "-" + (evento.fecha_evento.getDate()+1 )
+                        evento.evento= evento.nombreEvento
+                        formatted_date_ = today.getFullYear() + "-" + (evento.fecha.getMonth()+ 1) + "-" + (evento.fecha.getDate()+1 )
                         evento.inicio=formatted_date_
+                        if (evento.estatus=="generado" ) {
+                          evento.color = "orange";
+                        }
+
+
+                        if (evento.estatus=="programado" ) {
+                          evento.color = "green";
+                        }
+
+                        if (evento.estatus=="enviado" ) {
+                          evento.color = "grey darken-1";
+                        }
                         //colaborador.fin= formatted_date
-                        console.log("FORMATED DATE  " + evento.nombre+ "    " + formatted_date_);
+                        //console.log("FORMATED DATE  " + evento.nombre+ "    " + formatted_date_);
                         eventos.push(evento);
-                        console.log("zzz" + evento.nombre);
+                        //console.log("zzz" + evento.nombre);
 
                       } 
 
@@ -312,6 +366,60 @@ module.exports = {
       } finally {
 
           await client.close();
+
+      }
+   
+
+
+    },
+
+
+    async get_empresa_by_id(id) {
+            
+      /**
+      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+      */
+
+      var eventos=[];
+
+      const client = new MongoClient(uri);
+
+      try {
+
+          // Connect to the MongoDB cluster
+
+          await client.connect();
+
+          // Make the appropriate DB calls
+          console.log("Id...................." + String(id))
+
+          Empresa = await client.db("hentropy").collection("empresa").findOne({"_id" : ObjectId(id)})
+    
+            //console.log(JSON.stringify(docs));
+         
+          email = Empresa.email
+            //console.log( "actual month ---> " + today.getMonth());
+          
+            console.log("empreeeeesaaaaaaaaaaa" + JSON.stringify(Empresa));
+          
+            //callbackPromise(eventos);
+
+
+
+      
+          //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
+
+
+      } catch (e) {
+
+          console.error(e);
+
+      } finally {
+
+          
+          await client.close();
+          return email
 
       }
    

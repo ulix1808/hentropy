@@ -47,16 +47,25 @@ app.get('/api/empresas', (req, res) => {
     console.log('api/colaboradores called!!!!!!!')
   
    base.get_colaboradores(req,res);
-
-
+   // filtra por empresa
 
   });
+
+
+  app.post('/api/colaborador_info', (req, res) => {
+    console.log('api/colaboradores called!!!!!!!')
+  
+   base.get_colaboradores(req,res);
+   // filtra por empresa
+
+  });
+
+
 app.post('/api/createEvent',(req,res)=>{
-  console.log(req.body);
-  res="ok"
-  return res
-
-
+  console.log("Create Event" );
+  console.log( req.body);
+  //res="ok"
+  return base.insert_eventos(req,res);
 });
 
 
@@ -66,9 +75,7 @@ app.post('/api/envioCorreo',(req,res)=>{
   //body: JSON.stringify({correo: correo,email:email,asunto:auntoCorreo,id_colab:id_colab,tipo_evento:tipo_evento})
   evento = req.body;
   evento.bandera=1;
-  insert_eventos(evento);
-
-
+  //insert_eventos(evento);
 
 });
 
@@ -84,8 +91,6 @@ app.post('/api/empresa_selector', (req, res) => {
 
 
 app.post('/api/eventos', (req, res) => {
-
-  
   base.get_eventos(req, res);
   
   //metodo para obtener los colaborradores por empresa:
