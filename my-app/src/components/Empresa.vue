@@ -82,8 +82,9 @@ import Calendar2 from '../components/Calendar2'
             end: this.allEvents[i].fin,
             color: this.allEvents[i].color,
             email: this.allEvents[i].email,
-            id_colab: this.allEvents[i]._id,
-            tipo_evento: this.allEvents[i].tipo_evento,
+            id_colab: this.allEvents[i].id_colab,
+            _id: this.allEvents[i]._id,
+            tipo: this.allEvents[i].tipo_evento,
 
             //timed: !allDay,
           })

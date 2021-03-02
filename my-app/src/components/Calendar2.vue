@@ -217,8 +217,9 @@ import agregar from '../components/agregar'
             end: this.allEvents[i].fin,
             color: this.allEvents[i].color,
             email: this.allEvents[i].email,
-            id_colab: this.allEvents[i]._id,
-            tipo_evento: this.allEvents[i].tipo_evento,
+            id_colab: this.allEvents[i].id_colab,
+             _id: this.allEvents[i]._id,
+            tipo: this.allEvents[i].tipo_evento,
 
             //timed: !allDay,
           })
@@ -244,7 +245,7 @@ import agregar from '../components/agregar'
         if(this.correo.length==0|| this.auntoCorreo==0){
           this.correoError=true;
         }else{
-    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo_evento,this.selectedEvent.start).then( response => {
+    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo,this.selectedEvent.start,this.selectedEvent._id).then( response => {
           console.log(response)
           this.selectedOpen = false
          this.correoError=false

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const randomId = require('random-id');
-const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores,get_empresas } = require('./model');
+const { colaboradores_eventos,insert_eventos,get_eventos, get_colaboradores,get_empresas,update_evento } = require('./model');
 var EmailCtrl = require('./mailCtrl');
 const app = express(),
       bodyParser = require("body-parser");
@@ -64,17 +64,19 @@ app.get('/api/empresas', (req, res) => {
 app.post('/api/createEvent',(req,res)=>{
   console.log("Create Event" );
   console.log( req.body);
-  //res="ok"
+  //res="ok
   return base.insert_eventos(req,res);
 });
 
 
-app.post('/api/envioCorreo',(req,res)=>{
+app.post('/api/programarEvento',(req,res)=>{
   console.log(req.body.correo);
   console.log(req.body.id_colab);
   //body: JSON.stringify({correo: correo,email:email,asunto:auntoCorreo,id_colab:id_colab,tipo_evento:tipo_evento})
   evento = req.body;
   evento.bandera=1;
+  //actualizar eventos
+  base.update_evento(req,res);
   //insert_eventos(evento);
 
 });

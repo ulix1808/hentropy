@@ -425,6 +425,63 @@ module.exports = {
    
 
 
+    },
+
+
+    async update_evento(req,res) {
+            
+      /**
+      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+      */
+
+      var eventos=[];
+
+      const client = new MongoClient(uri);
+
+      try {
+
+          // Connect to the MongoDB cluster
+
+          await client.connect();
+
+          // Make the appropriate DB calls
+          console.log("Actualiza evento...................." + String(req.body._id));
+          console.log("Actualiza evento...................." + String(req.body.mensaje));
+
+          //Empresa = await client.db("hentropy").collection("eventos").findOne({"_id" : ObjectId(req.body._id)})
+    
+            //console.log(JSON.stringify(docs));
+
+
+            var myquery = {"_id" : ObjectId(req.body._id)};
+            var newvalues = { $set: {asunto:req.body.asunto , mensaje:req.body.mensaje } };
+            client.db("hentropy").collection("eventos").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+              client.close();
+    
+
+            });
+      
+          //colaboradoresList.colaboradores.forEach(cl => console.log(` - ${cl}`));
+
+
+      } catch (e) {
+
+          console.error(e);
+          return  res.json({error:e});
+
+      } finally {
+
+          
+          await client.close();
+          return  res.json("ok");
+
+      }
+   
+
+
     }
 
 
