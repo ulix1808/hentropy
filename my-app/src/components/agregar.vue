@@ -239,6 +239,10 @@ import { getColaboradores,createEvent} from '../services/UserService'
           createEvent(pet).then(response => {
                console.log("guardando evento--------------");
             console.log(response)
+            this.seleccionado=[]
+            this.nombreEvento=""
+            this.descripcionEvento=""
+            this.fechaEvento=""
             })
           this.dialog = false
 

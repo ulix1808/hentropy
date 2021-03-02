@@ -54,6 +54,7 @@ export async function  createEvent(data) {
 
 
     })
+    console.log("evento creado")
     return  await response.json();
    
   
