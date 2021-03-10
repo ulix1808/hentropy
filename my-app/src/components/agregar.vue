@@ -12,7 +12,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          Open Dialog
+          Agregar Evento
         </v-btn>
       </template>
       <v-card>
