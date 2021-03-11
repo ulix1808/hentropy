@@ -69,11 +69,11 @@ export async function setEmpresa(data) {
     return await response.json();
 
 }
-export async function setCorreo(email,correo,auntoCorreo,id_colab,tipo,start,_id){
+export async function setCorreo(email,correo,auntoCorreo,id_colab,tipo,start,_id,token){
     const response = await fetch(`/api/programarEvento`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({mensaje: correo,email:email,asunto:auntoCorreo,id_colaborardor:id_colab,tipo:tipo,fecha_evento:start,_id:_id })
+        body: JSON.stringify({mensaje: correo,email:email,asunto:auntoCorreo,id_colaborardor:id_colab,tipo:tipo,fecha_evento:start,_id:_id,token:token })
       })
     return await response.json();
 }

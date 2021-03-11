@@ -20,17 +20,15 @@
               fab
               text
               small
-              color="#adbacf"
+              color="grey darken-2"
               @click="prev"
             >
               <v-icon small>
                 mdi-chevron-left
               </v-icon>
             </v-btn>
-            <v-btn
-              fab
-              text
-              small
+            <v-btn fab
+              text small
               color="grey darken-2"
               @click="next"
             >
@@ -38,6 +36,7 @@
                 mdi-chevron-right
               </v-icon>
             </v-btn>
+            
             <v-toolbar-title v-if="$refs.calendar">
               {{ $refs.calendar.title }}
             </v-toolbar-title>
@@ -110,6 +109,10 @@
                 </v-btn>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-switch
+                v-model="token"
+                :label="`Tipo`"
+                ></v-switch>
                 <v-btn icon>
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
@@ -117,7 +120,7 @@
                   <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </v-toolbar>
-              <v-card-text>
+              <v-card-text v-show="!token">
                 <v-alert
                   border="top"
                   color="red lighten-2"
@@ -191,6 +194,7 @@ import agregar from '../components/agregar'
       correo:"",
       correoError:false,
       auntoCorreo:"",
+      token:false,
       allEvents:[],
       //events: [],
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
@@ -245,17 +249,30 @@ import agregar from '../components/agregar'
         if(this.correo.length==0|| this.auntoCorreo==0){
           this.correoError=true;
         }else{
-    setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo,this.selectedEvent.start,this.selectedEvent._id).then( response => {
+          if(!this.token){
+      setCorreo(this.selectedEvent.email,this.correo,this.auntoCorreo,this.selectedEvent.id_colab,this.selectedEvent.tipo,this.selectedEvent.start,this.selectedEvent._id,1).then( response => {
           console.log(response)
           this.selectedOpen = false
          this.correoError=false
          this.correo=""
          this.auntoCorreo=""
         })
-         
+          }
         }
+          if(this.token){
+            this.correoError=false;
+             setCorreo(this.selectedEvent.email,"","",this.selectedEvent.id_colab,this.selectedEvent.tipo,this.selectedEvent.start,this.selectedEvent._id,2).then( response => {
+          console.log(response)
+          this.selectedOpen = false
+         this.correoError=false
+         this.correo=""
+         this.auntoCorreo=""
+        })
+
+          }
+    
       
-            
+         
        
       },
       next () {
