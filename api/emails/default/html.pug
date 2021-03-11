@@ -1,2 +1,29 @@
-p Hi #{mensaje},
-p Welcome to Mars, the red planet.
+//- An attribute but be added inside parentheses.
+//- They might look similar to plain HTML attributes but value of an attribute is actually a JavaScript exprssion.
+//- Below is string used as JavaScript expression.
+a(href="https://google.com") google.com
+
+p.
+
+//- Using inline JavaScript variable
+//- Read more about inline JavaScript code in `inline JavaScript` topic below.
+//- Below, we used ` ` space character to separate multiple attributes
+
+
+img(src='https://grupobimbo-com-custom01-assets.s3.amazonaws.com/s3fs-public/grupo-bimbo-home-logo-osito-bimbo_2_1_2_1.jpg' alt='login' title="Logo"  style='width:100px; height:100px; display:block;')
+
+
+//- If you have huge list of attributes, you can span attributes over multiple lines.
+//- We can also use single-quotes `''` or double-quotes `""` to wrap attribute name. 
+
+
+//- Class literal is also valid
+button.btn.btn-sm Click Me
+p.simple.
+    Hello World! #{mensaje}
+    I am in a block
+.general.div I am in default tag is `div`.
+//- Like class literal, id literal is also valid.
+a#main-link Click Me!
+a.link#main-link Click Me!
+#main-link I am in default tag is `div`.
