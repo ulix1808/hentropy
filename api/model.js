@@ -455,7 +455,8 @@ module.exports = {
 
 
             var myquery = {"_id" : ObjectId(req.body._id)};
-            var newvalues = { $set: {asunto:req.body.asunto , mensaje:req.body.mensaje } };
+            var newvalues = { $set: {asunto:req.body.asunto , mensaje:req.body.mensaje, estatus:"programado" } };
+         
             client.db("hentropy").collection("eventos").updateOne(myquery, newvalues, function(err, res) {
               if (err) throw err;
               console.log("1 document updated");

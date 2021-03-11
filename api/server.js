@@ -101,6 +101,25 @@ app.post('/api/eventos', (req, res) => {
 
 });
 
+
+
+app.post('/api/sendEmail', (req, res) => {
+
+// llamamos al metodo que envia el mail y le pasamos los parametros que rertorna el buscar eventos
+// le mandamos el JSON desde postman
+
+console.log(JSON.stringify(req.body))
+console.log("mail part ............" + req.body.template)
+console.log("............" + req.body.service)
+EmailCtrl.sendEmail(req,res);
+
+
+
+
+});
+
+
+
 app.post('/api/user', (req, res) => {
   const user = req.body.user;
   user.id = randomId(10);

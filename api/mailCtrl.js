@@ -1,29 +1,44 @@
-var nodemailer = require('nodemailer');
+
+
+
+var Email = require('email-templates');
 // email sender function
-exports.sendEmail = function(req, res){
+
+
+
+exports.sendEmail = function(req, res) {
 // Definimos el transporter
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
+
+
+console.log("mail part ............" + req.body.template)
+console.log("............" + req.body.service)
+console.log("..PASS.........." + req.body.pass)
+
+const email = new Email({
+
+    message: {
+      from: req.body.from
+    },
+    send: true,
+    transport: {
+        service: req.body.service,
         auth: {
-            user: 'ulises.m.1808@gmail.com',
-            pass: ''
+            user: req.body.user,
+            pass: req.body.pass
         }
-    });
-// Definimos el email
-var mailOptions = {
-    from: 'humanentropy',
-    to: 'abel.diego@humanentropy.io',
-    subject: 'Happy Valentines Day',
-    text: 'Toque 1 - Test - :) '
-};
-// Enviamos el email
-transporter.sendMail(mailOptions, function(error, info){
-    if (error){
-        console.log(error);
-        //res.send(500, error.message);
-    } else {
-        console.log("Email sent");
-        res.status(200).jsonp(req);
     }
-});
+   });
+
+   email.send({
+     template: req.body.template,
+     message: {
+       to: req.body.to
+     },
+     locals: req.body
+   })
+   .then(res.json({"estatus": "enviado"}))
+   .catch( console.error );
+
+   return res
+
 };
