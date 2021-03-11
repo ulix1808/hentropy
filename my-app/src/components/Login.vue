@@ -11,14 +11,14 @@
                      <v-card-text>
                         <v-form>
                            <v-text-field
-                              prepend-icon="person"
+                              append-icon="mdi-account"
                               name="login"
                               label="Login"
                               type="text"
                            ></v-text-field>
                            <v-text-field
                               id="password"
-                              prepend-icon="lock"
+                              append-icon="mdi-lock"
                               name="password"
                               label="Password"
                               type="password"

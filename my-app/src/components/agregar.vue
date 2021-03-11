@@ -83,7 +83,9 @@
                 sm="6"
                 md="3"
               >
-              <v-datetime-picker label="Select Datetime" v-model="fechaEvento"> </v-datetime-picker>
+              <v-datetime-picker label="Select Datetime" dateIcon="mdi-calendar-blank"
+      timeIcon="mdi-skip-previous"
+      v-model="fechaEvento"> </v-datetime-picker>
 
               </v-col>
               <v-col
