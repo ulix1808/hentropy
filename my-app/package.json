@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-dropdowns": "^1.1.2",
     "vue-qrcode-component": "^2.1.1",
+    "vue-router": "^3.5.1",
     "vue-simple-calendar": "^5.0.0",
     "vuetify": "^2.4.4",
     "vuetify-datetime-picker": "^2.1.1"
