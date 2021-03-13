@@ -17,7 +17,15 @@ export async function  getAllEmpresas() {
     return  data
   
 }
+export async function  login() {
+    const response = await fetch(`/api/login`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+    })
 
+    return  await response.json()
+  
+}
 
 export async function  getColaboradores(empresa_id) {
     const response = await fetch(`/api/colaboradores`,{
